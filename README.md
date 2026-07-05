@@ -62,3 +62,7 @@ This code cannot prove that Home Assistant itself, HACS, your network, or SomaFM
 ## Version 0.1.1
 
 Fixes catalog loading with the current SomaFM `channels.xml` schema. SomaFM exposes playlist URLs through tags such as `highestpls` and `fastpls`; version 0.1.0 only looked for a legacy `pls` tag.
+
+## Support
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-support-yellow?logo=buymeacoffee)](https://buymeacoffee.com/kalykulam)
