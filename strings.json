@@ -1,0 +1,21 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Safe SomaFM",
+        "description": "Add SomaFM stations as a Home Assistant media source. This integration requires no account and stores no credentials."
+      }
+    },
+    "abort": {
+      "already_configured": "Safe SomaFM is already configured."
+    }
+  },
+  "exceptions": {
+    "station_not_found": {
+      "message": "The requested SomaFM station was not found."
+    },
+    "station_unavailable": {
+      "message": "The requested SomaFM station is temporarily unavailable."
+    }
+  }
+}
