@@ -192,21 +192,25 @@ _PLAYER_HTML = """<!doctype html>
       gap: 6px;
     }
 
+
+    body.compact-mode .grid { display: grid; }
+    body.compact-mode .section-title { display: flex; }
+    body.full-mode .grid { display: grid; }
+
   </style>
 </head>
-<body class="full-mode">
+<body>
   <main><div class="app">
     <section class="hero"><div class="app-icon" aria-hidden="true"><svg viewBox="0 0 128 128"><circle cx="64" cy="64" r="31" fill="#07111f"></circle><circle cx="64" cy="64" r="13" fill="#22c55e"></circle><path d="M30 48c-10 10-10 22 0 32M98 48c10 10 10 22 0 32M18 36c-18 18-18 38 0 56M110 36c18 18 18 38 0 56" fill="none" stroke="#f8fafc" stroke-width="8" stroke-linecap="round"></path></svg></div><div><h1>@@TITLE@@</h1><p class="subtitle">v@@VERSION@@</p></div></section>
     <section class="toolbar"><div><label for="search">Search stations</label><input id="search" type="search" placeholder="Search by name, genre, description..."></div><div><label for="quality">Quality / bitrate</label><select id="quality"><option value="auto">Auto (recommended)</option></select></div><div><label>Playback</label><div class="button-row"><button id="play" class="play-button">Play</button><button id="stop">Stop</button></div></div></section>
     <section class="now"><img id="stationImage" class="cover" alt="" loading="lazy"><div><h2 id="stationTitle">Loading stations...</h2><div id="stationChips" class="chips"></div><p id="stationDescription" class="description"></p><div id="stationNowPlaying" class="description hidden"><strong>Now playing: </strong><span id="stationNowPlayingText"></span></div><audio id="audio" controls preload="none"></audio><div id="status" class="status">Idle</div></div></section>
-    <section><div class="section-title"><h2>Stations</h2><div id="count" class="count"></div></div><div id="stationGrid" class="grid"></div></section>
+    <section><div class="section-title"><h2 id="stationsTitle">Stations</h2><div id="count" class="count"></div></div><div id="stationGrid" class="grid"></div></section>
   </div></main>
 <script>
 (() => {
   const params = new URLSearchParams(window.location.search);
   const compactMode = params.get('compact') === '1' || params.get('mode') === 'compact';
-  document.body.classList.toggle('compact-mode', compactMode);
-  document.body.classList.toggle('full-mode', !compactMode);
+  document.body.classList.add(compactMode ? 'compact-mode' : 'full-mode');
 
   const qualitySelect=document.getElementById('quality'), playButton=document.getElementById('play'), stopButton=document.getElementById('stop'), audio=document.getElementById('audio'), status=document.getElementById('status'), searchInput=document.getElementById('search'), stationGrid=document.getElementById('stationGrid'), count=document.getElementById('count'), stationImage=document.getElementById('stationImage'), stationTitle=document.getElementById('stationTitle'), stationChips=document.getElementById('stationChips'), stationDescription=document.getElementById('stationDescription'), stationNowPlaying=document.getElementById('stationNowPlaying'), stationNowPlayingText=document.getElementById('stationNowPlayingText');
   let currentStation=null, stations=[], intentionalStop=false, reconnectTimer=null, watchdogTimer=null, lastTime=0, lastAdvance=Date.now();
