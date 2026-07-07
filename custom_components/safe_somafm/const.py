@@ -2,7 +2,7 @@
 
 DOMAIN = "safe_somafm"
 NAME = "Safe SomaFM"
-VERSION = "0.9.0"
+VERSION = "0.9.1"
 
 SOMAFM_HOST = "somafm.com"
 # JSON endpoints are preferred because they expose a structured playlists array.

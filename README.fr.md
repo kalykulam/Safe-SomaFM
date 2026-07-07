@@ -11,7 +11,7 @@ Elle fournit :
 - le choix de qualité / débit ;
 - une logique de reconnexion automatique pour les longues écoutes.
 
-Version actuelle : **v0.9.0**
+Version actuelle : **v0.9.1**
 
 Documentation anglaise : [README.md](README.md)
 
@@ -302,3 +302,24 @@ Elle renvoie vers :
 - la revue de sécurité.
 
 L’intégration Home Assistant ne dépend pas de ce fichier. Il sert uniquement pour la page du projet GitHub.
+
+
+## v0.9.1 correction de structure HACS
+
+Cette version vérifie que les images de marque Home Assistant sont bien au bon endroit :
+
+```text
+custom_components/safe_somafm/brand/
+```
+
+Il ne doit pas exister de dossier séparé :
+
+```text
+custom_components/brand/
+```
+
+Si `custom_components/brand/` existe, HACS peut le prendre pour une intégration séparée et afficher :
+
+```text
+No manifest.json file found 'custom_components/brand/manifest.json'
+```

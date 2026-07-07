@@ -11,7 +11,7 @@ It provides:
 - selectable stream quality / bitrate;
 - automatic reconnect logic for long listening sessions.
 
-Current version: **v0.9.0**
+Current version: **v0.9.1**
 
 French documentation: [README.fr.md](README.fr.md)
 
@@ -302,3 +302,24 @@ It links to:
 - the security review.
 
 The Home Assistant integration itself does not depend on this file. It is only for the GitHub project page.
+
+
+## v0.9.1 HACS folder structure fix
+
+This version verifies that Home Assistant brand assets are stored in the correct location:
+
+```text
+custom_components/safe_somafm/brand/
+```
+
+There must not be a standalone folder named:
+
+```text
+custom_components/brand/
+```
+
+If `custom_components/brand/` exists, HACS may treat it as a separate integration and report:
+
+```text
+No manifest.json file found 'custom_components/brand/manifest.json'
+```
