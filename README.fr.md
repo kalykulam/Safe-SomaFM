@@ -11,7 +11,7 @@ Elle fournit :
 - le choix de qualité / débit ;
 - une logique de reconnexion automatique pour les longues écoutes.
 
-Version actuelle : **v0.9.3**
+Version actuelle : **v0.9.4**
 
 Documentation anglaise : [README.md](README.md)
 
@@ -367,3 +367,20 @@ Donc `manifest.json` déclare maintenant :
 ```
 
 La logique de lecture n’est pas modifiée.
+
+
+## v0.9.4 correction ordre manifest Hassfest
+
+Cette version corrige l’erreur Hassfest :
+
+```text
+[MANIFEST] Manifest keys are not sorted correctly: domain, name, then alphabetical order
+```
+
+`manifest.json` respecte maintenant l’ordre attendu :
+
+1. `domain`
+2. `name`
+3. toutes les autres clés par ordre alphabétique
+
+Aucun comportement de l’intégration n’est modifié.

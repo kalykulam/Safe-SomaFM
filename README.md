@@ -11,7 +11,7 @@ It provides:
 - selectable stream quality / bitrate;
 - automatic reconnect logic for long listening sessions.
 
-Current version: **v0.9.3**
+Current version: **v0.9.4**
 
 French documentation: [README.fr.md](README.fr.md)
 
@@ -367,3 +367,20 @@ So `manifest.json` now declares:
 ```
 
 No playback logic changed.
+
+
+## v0.9.4 Hassfest manifest ordering fix
+
+This version fixes the Hassfest manifest ordering error:
+
+```text
+[MANIFEST] Manifest keys are not sorted correctly: domain, name, then alphabetical order
+```
+
+`manifest.json` now uses the required order:
+
+1. `domain`
+2. `name`
+3. all remaining keys alphabetically
+
+No runtime behavior changed.

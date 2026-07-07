@@ -192,3 +192,10 @@ No runtime playback, network validation, or endpoint behavior was changed.
 This version declares Home Assistant's `http` component in `manifest.json` dependencies because Safe SomaFM registers local HTTP views.
 
 No runtime behavior, playback logic, or network validation behavior was changed.
+
+
+## v0.9.4 manifest ordering note
+
+This version only changes `manifest.json` key ordering to satisfy Hassfest.
+
+No runtime playback, endpoint, or network validation behavior was changed.

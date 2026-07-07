@@ -10,9 +10,9 @@
     "media_source"
   ],
   "documentation": "https://github.com/kalykulam/Safe-SomaFM",
-  "iot_class": "cloud_polling",
   "integration_type": "service",
+  "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/kalykulam/Safe-SomaFM/issues",
   "requirements": [],
-  "version": "0.9.3"
+  "version": "0.9.4"
 }
