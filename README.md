@@ -216,3 +216,12 @@ custom_components/safe_somafm/
 Safe SomaFM is not affiliated with SomaFM or Home Assistant.
 
 SomaFM names, station names and station artwork belong to SomaFM. The Safe SomaFM integration icon is original and does not use official SomaFM or Home Assistant logos.
+
+## Version 0.1.1
+
+Fixes catalog loading with the current SomaFM `channels.xml` schema. SomaFM exposes playlist URLs through tags such as `highestpls` and `fastpls`; version 0.1.0 only looked for a legacy `pls` tag.
+
+## Support
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-support-yellow?logo=buymeacoffee)](https://buymeacoffee.com/kalykulam)
+
