@@ -11,7 +11,7 @@ Elle fournit :
 - le choix de qualité / débit ;
 - une logique de reconnexion automatique pour les longues écoutes.
 
-Version actuelle : **v0.9.1**
+Version actuelle : **v0.9.2**
 
 Documentation anglaise : [README.md](README.md)
 
@@ -322,4 +322,23 @@ Si `custom_components/brand/` existe, HACS peut le prendre pour une intégration
 
 ```text
 No manifest.json file found 'custom_components/brand/manifest.json'
+```
+
+
+## v0.9.2 corrections validation HACS
+
+Cette version corrige des erreurs de validation HACS :
+
+- suppression de la clé non supportée `domains` dans `hacs.json`;
+- `hacs.json` simplifié;
+- utilisation d’un fichier `LICENSE` MIT standard pour que GitHub reconnaisse la licence du dépôt.
+
+Les topics GitHub doivent encore être configurés directement sur GitHub. Topics recommandés :
+
+```text
+home-assistant
+hacs
+hacs-integration
+somafm
+radio
 ```

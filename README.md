@@ -11,7 +11,7 @@ It provides:
 - selectable stream quality / bitrate;
 - automatic reconnect logic for long listening sessions.
 
-Current version: **v0.9.1**
+Current version: **v0.9.2**
 
 French documentation: [README.fr.md](README.fr.md)
 
@@ -322,4 +322,23 @@ If `custom_components/brand/` exists, HACS may treat it as a separate integratio
 
 ```text
 No manifest.json file found 'custom_components/brand/manifest.json'
+```
+
+
+## v0.9.2 HACS validation fixes
+
+This version fixes HACS validation issues:
+
+- removes the unsupported `domains` key from `hacs.json`;
+- keeps `hacs.json` minimal;
+- uses a standard MIT `LICENSE` file so GitHub can identify the repository license.
+
+Repository topics still need to be configured directly on GitHub. Recommended topics:
+
+```text
+home-assistant
+hacs
+hacs-integration
+somafm
+radio
 ```

@@ -174,3 +174,14 @@ No playback logic, network validation, or endpoint behavior was changed.
 This version fixes/verifies repository layout for HACS by ensuring `brand/` assets are nested under the integration folder and not directly under `custom_components/`.
 
 No runtime playback or network behavior changed.
+
+
+## v0.9.2 HACS metadata note
+
+This version only changes repository metadata for HACS validation:
+
+- minimal `hacs.json`;
+- standard MIT license text;
+- documentation note about required GitHub repository topics.
+
+No runtime playback, network validation, or endpoint behavior was changed.
