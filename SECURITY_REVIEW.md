@@ -185,3 +185,10 @@ This version only changes repository metadata for HACS validation:
 - documentation note about required GitHub repository topics.
 
 No runtime playback, network validation, or endpoint behavior was changed.
+
+
+## v0.9.3 Hassfest dependency note
+
+This version declares Home Assistant's `http` component in `manifest.json` dependencies because Safe SomaFM registers local HTTP views.
+
+No runtime behavior, playback logic, or network validation behavior was changed.

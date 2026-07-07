@@ -11,7 +11,7 @@ Elle fournit :
 - le choix de qualité / débit ;
 - une logique de reconnexion automatique pour les longues écoutes.
 
-Version actuelle : **v0.9.2**
+Version actuelle : **v0.9.3**
 
 Documentation anglaise : [README.md](README.md)
 
@@ -342,3 +342,28 @@ hacs-integration
 somafm
 radio
 ```
+
+
+## v0.9.3 correction dépendance Hassfest
+
+Cette version corrige l’erreur Hassfest :
+
+```text
+[DEPENDENCIES] Using component http but it's not in dependencies or after_dependencies
+```
+
+L’intégration utilise le composant Home Assistant `http` pour les endpoints locaux :
+
+```text
+/safe_somafm/player
+/safe_somafm/card.js
+/safe_somafm/panel.js
+```
+
+Donc `manifest.json` déclare maintenant :
+
+```json
+"dependencies": ["http"]
+```
+
+La logique de lecture n’est pas modifiée.

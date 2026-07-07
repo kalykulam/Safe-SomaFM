@@ -11,7 +11,7 @@ It provides:
 - selectable stream quality / bitrate;
 - automatic reconnect logic for long listening sessions.
 
-Current version: **v0.9.2**
+Current version: **v0.9.3**
 
 French documentation: [README.fr.md](README.fr.md)
 
@@ -342,3 +342,28 @@ hacs-integration
 somafm
 radio
 ```
+
+
+## v0.9.3 Hassfest dependency fix
+
+This version fixes the Hassfest validation error:
+
+```text
+[DEPENDENCIES] Using component http but it's not in dependencies or after_dependencies
+```
+
+The integration uses Home Assistant's `http` component for local endpoints such as:
+
+```text
+/safe_somafm/player
+/safe_somafm/card.js
+/safe_somafm/panel.js
+```
+
+So `manifest.json` now declares:
+
+```json
+"dependencies": ["http"]
+```
+
+No playback logic changed.
