@@ -13,8 +13,8 @@ from homeassistant.components.media_source import (
 )
 from homeassistant.core import HomeAssistant
 
-from .somafm import SafeSomaFMClient, SomaFMError, SomaFMValidationError
 from .const import DOMAIN, NAME
+from .somafm import SafeSomaFMClient, SomaFMError, SomaFMValidationError
 
 
 async def async_get_media_source(hass: HomeAssistant) -> SafeSomaFMMediaSource:
@@ -44,7 +44,7 @@ class SafeSomaFMMediaSource(MediaSource):
         """Resolve a SomaFM station to a playable stream URL."""
         station_id = item.identifier.strip("/")
         try:
-            stream_url = await self.client.async_resolve_station(station_id)
+            resolved = await self.client.async_resolve_station(station_id)
         except SomaFMValidationError as err:
             raise Unresolvable(
                 translation_domain=DOMAIN,
@@ -56,7 +56,12 @@ class SafeSomaFMMediaSource(MediaSource):
                 translation_key="station_unavailable",
             ) from err
 
-        return PlayMedia(stream_url, "audio/mpeg")
+        # Return a fresh direct audio URL resolved at click/play time. Home
+        # Assistant's browser player does not support .pls playlists directly,
+        # and proxying the stream through Home Assistant caused short-lived
+        # playback in tests. The stable SomaFM playlist remains the source of
+        # truth, but the browser receives a native audio stream URL.
+        return PlayMedia(resolved.url, resolved.content_type)
 
     async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
         """Browse the SomaFM station catalog."""
@@ -84,7 +89,7 @@ class SafeSomaFMMediaSource(MediaSource):
 
         return BrowseMediaSource(
             domain=DOMAIN,
-            identifier=None,
+            identifier="",
             media_class=MediaClass.DIRECTORY,
             media_content_type=MediaType.MUSIC,
             title=NAME,
@@ -92,3 +97,7 @@ class SafeSomaFMMediaSource(MediaSource):
             can_expand=True,
             children=children,
         )
+
+    def generate_media_source_id(self, station_id: str) -> str:
+        """Generate a Home Assistant media source ID for a station."""
+        return generate_media_source_id(DOMAIN, station_id)

@@ -1,64 +1,218 @@
 # Safe SomaFM for Home Assistant
 
-A deliberately small Home Assistant media source for SomaFM stations.
+Safe SomaFM is a defensive Home Assistant custom integration for listening to [SomaFM](https://somafm.com/) streams from Home Assistant.
 
-## Security design
+It provides:
 
-This integration is intentionally constrained:
+- a local Home Assistant browser player;
+- a compact Lovelace dashboard card;
+- a sidebar launcher that opens the full player in a new browser tab;
+- station artwork, descriptions, genre, listeners, DJ and now-playing metadata when SomaFM provides it;
+- selectable stream quality / bitrate;
+- automatic reconnect logic for long listening sessions.
 
-- no credentials, tokens, cookies, or secrets
-- no dynamic imports
-- no shell commands or subprocesses
-- no local file reads or writes
-- no inbound HTTP server, webhook, or callback endpoint
-- no third-party Python requirements
-- outbound HTTP requests are limited to validated `https://*.somafm.com` URLs
-- station identifiers are restricted to ASCII letters, digits, `_`, and `-`
-- remote XML and playlist files have strict size limits
-- XML containing `DOCTYPE` or `ENTITY` declarations is rejected before parsing
-- playlists are accepted only if they resolve to `http://*.somafm.com` or `https://*.somafm.com` stream URLs
+Current version: **v0.8.3**
 
-## What it does
+French documentation: [README.fr.md](README.fr.md)
 
-It exposes SomaFM stations in Home Assistant's Media Browser via the `media_source` platform.
-You can browse SomaFM stations and play them on supported media players.
+---
+
+## Why this integration exists
+
+The standard Home Assistant Media Browser can hand the stream directly to the browser. In testing, some browsers stopped long-running SomaFM streams after several minutes.
+
+Safe SomaFM uses a local Home Assistant player page with automatic reconnect handling. The full player has been tested successfully for long listening sessions.
+
+---
+
+## Features
+
+### Local player
+
+Open the full player directly:
+
+```text
+/safe_somafm/player
+```
+
+The full player shows:
+
+- station artwork;
+- a searchable station grid;
+- station metadata;
+- quality / bitrate selection;
+- play and stop controls;
+- automatic reconnect status.
+
+### Compact dashboard mode
+
+The Lovelace card uses the compact player mode:
+
+```text
+/safe_somafm/player?compact=1
+```
+
+This mode is designed for dashboard columns and uses smaller station thumbnails.
+
+### Sidebar launcher
+
+The integration registers a **Safe SomaFM** item in the Home Assistant left sidebar.
+
+Clicking the sidebar item attempts to open the full player in a **new browser tab**.
+
+If the browser blocks the automatic new tab, a small fallback page is shown with an **Open Safe SomaFM** button.
+
+### Lovelace card
+
+The integration serves a local card resource:
+
+```text
+/safe_somafm/card.js
+```
+
+Add it as a Home Assistant dashboard resource:
+
+```text
+JavaScript module
+```
+
+Then add a card:
+
+```yaml
+type: custom:safe-somafm-card
+title: Safe SomaFM
+height: 320px
+```
+
+Optional larger version:
+
+```yaml
+type: custom:safe-somafm-card
+title: Safe SomaFM
+height: 420px
+show_header: true
+```
+
+---
 
 ## Installation
 
-Manual installation:
+### Manual installation
 
-1. Copy `custom_components/safe_somafm` into your Home Assistant configuration directory:
-   `/config/custom_components/safe_somafm`
-2. Restart Home Assistant.
-3. Go to **Settings > Devices & services > Add integration**.
-4. Search for **Safe SomaFM** and add it.
-5. Open **Media Browser** and select **Safe SomaFM**.
+1. Copy this folder:
 
-HACS custom repository:
+```text
+custom_components/safe_somafm/
+```
 
-1. Put this repository on GitHub.
-2. In HACS, add it as a custom repository of type **Integration**.
-3. Install it, restart Home Assistant, then add the integration from the UI.
+to your Home Assistant configuration directory:
+
+```text
+/config/custom_components/safe_somafm/
+```
+
+2. Restart Home Assistant completely.
+3. Go to **Settings → Devices & services → Add integration**.
+4. Search for **Safe SomaFM**.
+5. Add the integration.
+
+### Updating
+
+When updating manually:
+
+1. Stop or restart Home Assistant.
+2. Delete the old folder:
+
+```text
+/config/custom_components/safe_somafm/
+```
+
+3. Copy the new `safe_somafm` folder.
+4. Restart Home Assistant.
+5. Refresh the browser with `Ctrl + F5`.
+
+---
+
+## Dashboard setup
+
+### Add the card resource
+
+In Home Assistant:
+
+1. Open a dashboard.
+2. Click **Edit dashboard**.
+3. Open the top-right menu.
+4. Go to **Resources**.
+5. Add:
+
+```text
+/safe_somafm/card.js
+```
+
+Resource type:
+
+```text
+JavaScript module
+```
+
+### Add the card
+
+```yaml
+type: custom:safe-somafm-card
+title: Safe SomaFM
+height: 320px
+```
+
+---
+
+## Security posture
+
+Safe SomaFM is intentionally limited:
+
+- no user credentials;
+- no secrets;
+- no external Python dependencies;
+- no shell execution;
+- no dynamic imports;
+- no arbitrary proxy;
+- no arbitrary stream URL input;
+- station IDs are validated;
+- playlist and image URLs are validated as SomaFM URLs;
+- playback endpoints are local Home Assistant endpoints.
+
+The sidebar launcher only opens:
+
+```text
+/safe_somafm/player
+```
+
+It does not accept external URLs.
+
+More details are available in [SECURITY_REVIEW.md](SECURITY_REVIEW.md).
+
+---
 
 ## Files
 
 ```text
 custom_components/safe_somafm/
-  __init__.py
-  somafm.py
-  config_flow.py
-  const.py
-  manifest.json
-  media_source.py
-  strings.json
-hacs.json
-README.md
+├── __init__.py
+├── card.py
+├── config_flow.py
+├── const.py
+├── manifest.json
+├── media_source.py
+├── panel.py
+├── player.py
+├── somafm.py
+├── strings.json
+└── brand/
 ```
+
+---
 
 ## Notes
 
-This code cannot prove that Home Assistant itself, HACS, your network, or SomaFM are risk-free. It only minimizes the integration's own attack surface and makes the behavior easy to audit.
+Safe SomaFM is not affiliated with SomaFM or Home Assistant.
 
-## Version 0.1.1
-
-Fixes catalog loading with the current SomaFM `channels.xml` schema. SomaFM exposes playlist URLs through tags such as `highestpls` and `fastpls`; version 0.1.0 only looked for a legacy `pls` tag.
+SomaFM names, station names and station artwork belong to SomaFM. The Safe SomaFM integration icon is original and does not use official SomaFM or Home Assistant logos.
