@@ -11,7 +11,7 @@ It provides:
 - selectable stream quality / bitrate;
 - automatic reconnect logic for long listening sessions.
 
-Current version: **v0.8.4**
+Current version: **v0.9.0**
 
 French documentation: [README.fr.md](README.fr.md)
 
@@ -94,6 +94,70 @@ show_header: true
 ```
 
 ---
+
+
+## HACS installation
+
+Safe SomaFM can be installed through HACS as a custom repository.
+
+### Add as a custom repository
+
+1. Open **HACS** in Home Assistant.
+2. Open the top-right menu.
+3. Select **Custom repositories**.
+4. Add your GitHub repository URL.
+5. Select category:
+
+```text
+Integration
+```
+
+6. Click **Add**.
+7. Search for **Safe SomaFM** in HACS.
+8. Download it.
+9. Restart Home Assistant.
+10. Go to **Settings → Devices & services → Add integration** and add **Safe SomaFM**.
+
+### Lovelace card resource
+
+After installing through HACS, add this dashboard resource if it is not added automatically:
+
+```text
+/safe_somafm/card.js
+```
+
+Resource type:
+
+```text
+JavaScript module
+```
+
+Then use:
+
+```yaml
+type: custom:safe-somafm-card
+title: Safe SomaFM
+height: 320px
+```
+
+### Sidebar launcher
+
+After a full Home Assistant restart, the **Safe SomaFM** sidebar item should appear. It opens the full player in a new browser tab.
+
+If it does not appear immediately, refresh the browser with `Ctrl + F5`.
+
+## HACS readiness
+
+This repository includes:
+
+```text
+hacs.json
+.github/workflows/hacs.yml
+.github/workflows/hassfest.yml
+custom_components/safe_somafm/brand/icon.png
+```
+
+The HACS workflow validates the repository as an `integration`, and Hassfest validates the Home Assistant integration metadata.
 
 ## Installation
 

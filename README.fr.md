@@ -11,7 +11,7 @@ Elle fournit :
 - le choix de qualité / débit ;
 - une logique de reconnexion automatique pour les longues écoutes.
 
-Version actuelle : **v0.8.4**
+Version actuelle : **v0.9.0**
 
 Documentation anglaise : [README.md](README.md)
 
@@ -94,6 +94,70 @@ show_header: true
 ```
 
 ---
+
+
+## Installation avec HACS
+
+Safe SomaFM peut être installé via HACS comme dépôt personnalisé.
+
+### Ajouter comme dépôt personnalisé
+
+1. Ouvre **HACS** dans Home Assistant.
+2. Ouvre le menu en haut à droite.
+3. Sélectionne **Dépôts personnalisés**.
+4. Ajoute l’URL de ton dépôt GitHub.
+5. Sélectionne la catégorie :
+
+```text
+Integration
+```
+
+6. Clique sur **Ajouter**.
+7. Cherche **Safe SomaFM** dans HACS.
+8. Télécharge l’intégration.
+9. Redémarre Home Assistant.
+10. Va dans **Paramètres → Appareils et services → Ajouter une intégration** et ajoute **Safe SomaFM**.
+
+### Ressource de carte Lovelace
+
+Après installation via HACS, ajoute cette ressource de dashboard si elle n’est pas ajoutée automatiquement :
+
+```text
+/safe_somafm/card.js
+```
+
+Type de ressource :
+
+```text
+Module JavaScript
+```
+
+Puis utilise :
+
+```yaml
+type: custom:safe-somafm-card
+title: Safe SomaFM
+height: 320px
+```
+
+### Lanceur dans la barre latérale
+
+Après un redémarrage complet de Home Assistant, l’entrée **Safe SomaFM** devrait apparaître dans la barre latérale. Elle ouvre le lecteur complet dans un nouvel onglet.
+
+Si elle n’apparaît pas immédiatement, recharge le navigateur avec `Ctrl + F5`.
+
+## Préparation HACS
+
+Ce dépôt contient :
+
+```text
+hacs.json
+.github/workflows/hacs.yml
+.github/workflows/hassfest.yml
+custom_components/safe_somafm/brand/icon.png
+```
+
+Le workflow HACS valide le dépôt comme `integration`, et Hassfest valide les métadonnées de l’intégration Home Assistant.
 
 ## Installation
 
