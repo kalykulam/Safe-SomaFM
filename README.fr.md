@@ -11,7 +11,7 @@ Elle fournit :
 - le choix de qualité / débit ;
 - une logique de reconnexion automatique pour les longues écoutes.
 
-Version actuelle : **v0.8.3**
+Version actuelle : **v0.8.4**
 
 Documentation anglaise : [README.md](README.md)
 
@@ -216,3 +216,25 @@ custom_components/safe_somafm/
 Safe SomaFM n’est pas affiliée à SomaFM ni à Home Assistant.
 
 Les noms SomaFM, les noms des stations et les images des stations appartiennent à SomaFM. L’icône de l’intégration Safe SomaFM est originale et n’utilise pas les logos officiels SomaFM ou Home Assistant.
+
+
+## v0.8.4 correction de l’index des stations
+
+Cette version rétablit l’affichage de l’index/la grille des stations sur la page complète, tout en gardant la carte Lovelace compacte.
+
+- `/safe_somafm/player` conserve la grille complète des stations.
+- `/safe_somafm/player?compact=1` conserve l’affichage compact pour le dashboard.
+- La logique de lecture et de reconnexion n’est pas modifiée.
+
+
+## Page index GitHub Pages
+
+Ce dépôt contient une page `index.html` simple pour GitHub Pages.
+
+Elle renvoie vers :
+
+- le README anglais ;
+- le README français ;
+- la revue de sécurité.
+
+L’intégration Home Assistant ne dépend pas de ce fichier. Il sert uniquement pour la page du projet GitHub.
