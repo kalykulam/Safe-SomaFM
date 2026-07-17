@@ -384,3 +384,6 @@ This version fixes the Hassfest manifest ordering error:
 3. all remaining keys alphabetically
 
 No runtime behavior changed.
+
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-support-yellow?logo=buymeacoffee)](https://buymeacoffee.com/kalykulam)
